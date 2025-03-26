@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mapa Galáctico Sci-Fi</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    html, body, #map {
+      margin: 0;
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      background: repeating-linear-gradient(
+          0deg,
+          #0ff1 0px,
+          #0ff1 1px,
+          transparent 1px,
+          transparent 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          #0ff1 0px,
+          #0ff1 1px,
+          transparent 1px,
+          transparent 40px
+        ),
+        radial-gradient(ellipse at center, #0a0e2a 0%, #101828 100%);
+      background-blend-mode: screen;
+      animation: pulseGlow 20s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { background-color: #0ff1; }
+      50% { background-color: #0ff1; }
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: rgba(8, 12, 30, 0.95);
+      color: #0ff;
+      font-family: 'Orbitron', sans-serif;
+      border-radius: 8px;
+      border: 1px solid #0ff;
+      box-shadow: 0 0 15px #0ff;
+      padding: 10px;
+    }
+
+    .leaflet-popup-content {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #0ff;
+      text-shadow: 0 0 4px #0ff;
+    }
+
+    .leaflet-popup-content strong {
+      color: #0ff;
+    }
+
+    .leaflet-popup-tip {
+      background: #0ff;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #0ff; }
+      50% { box-shadow: 0 0 20px #0ff; }
+      100% { box-shadow: 0 0 10px #0ff; }
+    }
+
+    @keyframes basePulse {
+      0% { box-shadow: 0 0 10px #f0f; }
+      50% { box-shadow: 0 0 20px #f0f; }
+      100% { box-shadow: 0 0 10px #f0f; }
+    }
+
+    .planet, .base, .asteroide {
+      display: block;
+    }
+
+    .planet {
+      background: radial-gradient(circle at center, #0ff, #033);
+      border-radius: 50%;
+      box-shadow: 0 0 12px #0ff, 0 0 24px #0ff;
+      animation: pulse 50s infinite ease-in-out;
+    }
+
+    .base {
+      background: radial-gradient(circle, #f0f, #400040);
+      border-radius: 4px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px #f0f, 0 0 24px #f0f;
+      animation: basePulse 6s infinite ease-in-out;
+    }
+
+    .asteroide {
+      background: radial-gradient(circle, #aaa, #222);
+      border-radius: 30% 70% 60% 40% / 40% 30% 70% 60%;
+      filter: blur(0.3px);
+    }
+
+    .satélite {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #999);
+      box-shadow: 0 0 8px #ccc, 0 0 16px #ddd;
+      opacity: 0.8;
+    }
+
+    .planet-label {
+      color: rgb(48, 150, 150) !important;
+      font-size: 12px !important;
+      text-shadow: 0 0 3px rgb(27, 166, 166), 0 0 6px rgb(19, 149, 149);
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-curve@1.0.0/leaflet.curve.min.js"></script>
+  <script>
+    const map = L.map('map', {
+      crs: L.CRS.Simple,
+      minZoom: -2,
+      maxZoom: 2,
+      zoomControl: true
+    });
+
+    const bounds = [[0, 0], [2000, 2000]];
+    map.setView([1000, 1000], 0);
+
+    // Órbitas del sistema solar
+    const orbitas = [
+      { radio: 100, nombre: 'Mercurio' },
+      { radio: 130, nombre: 'Venus' },
+      { radio: 180, nombre: 'Marte' },
+      { radio: 250, nombre: 'Júpiter' },
+      { radio: 300, nombre: 'Saturno' },
+      { radio: 350, nombre: 'Urano' },
+      { radio: 400, nombre: 'Neptuno' }
+    ];
+
+    orbitas.forEach(orbita => {
+      L.circle([1000, 1000], {
+        radius: orbita.radio,
+        color: '#0ff',
+        weight: 1,
+        opacity: 0.4,
+        fill: false,
+        dashArray: '2,4'
+      }).addTo(map);
+    });
+
+    // Elipse morada simulada alrededor de las bases Regium
+    const centroElipse = [1000, 1100]; // punto medio visual
+    const radioX = 500; // "ancho" horizontal de la elipse
+    const radioY = 400; // "alto" vertical de la elipse
+
+// Generar puntos de una elipse en coordenadas CRS.Simple
+    const puntosElipse = [];
+    for (let i = 0; i <= 360; i += 5) {
+    const rad = i * Math.PI / 180;
+    const x = centroElipse[0] + radioX * Math.cos(rad);
+    const y = centroElipse[1] + radioY * Math.sin(rad);
+    puntosElipse.push([y, x]); // Leaflet usa [lat, lng]
+  }
+
+L.polyline(puntosElipse, {
+  color: '#f0f',
+  weight: 2,
+  opacity: 0.4,
+  dashArray: '4, 6'
+}).addTo(map);
+
+
+    // Fondo invisible delimitador
+    L.rectangle(bounds, {
+      color: "#0ff",
+      weight: 0,
+      fill: true,
+      fillColor: "transparent"
+    }).addTo(map);
+
+    // Cargar GeoJSON
+    fetch("universo.geojson")
+      .then(res => {
+        if (!res.ok) throw new Error("No se pudo cargar el archivo GeoJSON");
+        return res.json();
+      })
+      .then(data => {
+        L.geoJSON(data, {
+          pointToLayer: function (feature, latlng) {
+            const tipo = (feature.properties.tipo || "").toLowerCase();
+            const clase = tipo === "planeta" ? "planet"
+                         : tipo === "base" ? "base"
+                         : tipo === "asteroide" ? "asteroide"
+                         : tipo === "satélite" ? "satélite"
+                         : "default";
+
+            const size = feature.properties.tam || 20;
+
+            const icon = L.divIcon({
+              html: `<div class="${clase}" style="width:${size}px; height:${size}px;"></div>`,
+              className: '',
+              iconSize: [size, size]
+            });
+
+            const marker = L.marker(latlng, { icon: icon })
+              .bindPopup(`
+                <div style="font-size: 14px; line-height: 1.5;">
+                  <div style="font-size: 16px; font-weight: bold; margin-bottom: 6px; color: #0ff;">
+                    ${feature.properties.nombre || 'Sin nombre'}
+                  </div>
+                  <div style="margin-bottom: 6px;">
+                    ${feature.properties.descripcion || 'Sin descripción'}
+                  </div>
+                  <div><strong>Estado:</strong> ${feature.properties.estado || 'Sin datos'}</div>
+                </div>
+              `).addTo(map);
+
+            marker.bindTooltip(feature.properties.nombre || '', {
+              permanent: true,
+              direction: 'top',
+              className: 'planet-label',
+              offset: [0, -size / 2 - 5]
+            });
+
+            return marker;
+          }
+        });
+      })
+      .catch(err => {
+        console.error("Error cargando el mapa:", err);
+        alert("⚠️ Error cargando el mapa. Asegúrate de que 'universo.geojson' está en la misma carpeta.");
+      });
+
+      function dibujarRutaCurva(p1, p2, color = '#c0f') {
+        const midLat = (p1[0] + p2[0]) / 2;
+        const midLng = (p1[1] + p2[1]) / 2 - 100; // para crear curvatura
+
+        const curva = [
+        [p1[1], p1[0]],
+        [midLat, midLng],
+        [p2[1], p2[0]]
+        ];
+
+      L.curve(
+        [
+        'M', curva[0],
+        'Q', curva[1], curva[2]
+      ],
+      {
+      color: color,
+      weight: 1,
+      opacity: 0.3,
+      dashArray: '3,6'
+    }
+  ).addTo(map);
+  }
+
+  dibujarRutaCurva([1000, 1500], [800, 1800]); // Regium Paradise → Ecurión
+  dibujarRutaCurva([800, 1800], [1000, 2000]); // Ecurión → Etherion
+  dibujarRutaCurva([1000, 2000], [1600, 1600]); // Etherion → Firin
+  dibujarRutaCurva([1600, 1600], [1300, 1300]); // Firin → Ipselion
+  dibujarRutaCurva([1300, 1300], [1900, 1800]); // Ipselion → Deiton
+  dibujarRutaCurva([1900, 1800], [400, 700]);   // Deiton → Beta-7
+  dibujarRutaCurva([400, 700], [400, 1400]);    // Beta-7 → Igneror
+  </script>
+</body>
+</html>

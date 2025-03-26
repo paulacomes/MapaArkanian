@@ -1,0 +1,196 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1000, 1000] },
+      "properties": {
+        "nombre": "Tierra",
+        "tipo": "planeta",
+        "tam": 30,
+        "descripcion": "Planeta de origen de la humanidad.",
+        "estado": "Habitado"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [950, 900] },
+      "properties": {
+        "nombre": "Mercurio",
+        "tipo": "planeta",
+        "tam": 15,
+        "descripcion": "El planeta más cercano al Sol."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1050, 900] },
+      "properties": {
+        "nombre": "Venus",
+        "tipo": "planeta",
+        "tam": 25,
+        "descripcion": "Misterioso y envuelto en nubes."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [920, 1025] },
+      "properties": {
+        "nombre": "Marte",
+        "tipo": "planeta",
+        "tam": 28,
+        "descripcion": "El planeta rojo.",
+        "estado": "Colonizado"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1100, 1080] },
+      "properties": {
+        "nombre": "Júpiter",
+        "tipo": "planeta",
+        "tam": 40,
+        "descripcion": "Gigante gaseoso con muchas lunas."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [870, 1150] },
+      "properties": {
+        "nombre": "Saturno",
+        "tipo": "planeta",
+        "tam": 38,
+        "descripcion": "Famoso por sus anillos."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1150, 1180] },
+      "properties": {
+        "nombre": "Urano",
+        "tipo": "planeta",
+        "tam": 35,
+        "descripcion": "Gigante helado inclinado."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [850, 1250] },
+      "properties": {
+        "nombre": "Neptuno",
+        "tipo": "planeta",
+        "tam": 33,
+        "descripcion": "Furiosas tormentas azules."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [400, 1400] },
+      "properties": {
+        "nombre": "Igneror",
+        "tipo": "planeta",
+        "tam": 30,
+        "descripcion": "Colonia de Zabgor",
+        "estado": "Colonizado"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [800, 1800] },
+      "properties": {
+        "nombre": "Ecurión",
+        "tipo": "planeta",
+        "tam": 30,
+        "descripcion": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1000, 2000] },
+      "properties": {
+        "nombre": "Etherion",
+        "tipo": "planeta",
+        "tam": 30,
+        "descripcion": "Planeta parecido a la tierra con atmósfera segura."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1600, 1600] },
+      "properties": {
+        "nombre": "Firin",
+        "tipo": "planeta",
+        "tam": 30,
+        "descripcion": "Firin es un planeta pequeño, con atmosfera y entorno parecido al de la Tierra, a poca distancia de esta, y bien comunicado con rutas espaciales.",
+        "Estado": "Colonizado con muchas bases de comercio interplanetario, y muchos centros de negocio."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1300, 1300] },
+      "properties": {
+        "nombre": "Ipselion",
+        "tipo": "satélite",
+        "tam": 30,
+        "descripcion": "Pequeño satélite artificial en la órbita lunar.",
+        "estado": "Se creía en desuso y sus instalaciones abandonadas. El edificio principal tiene solo dos plantas en la superficie, pero todo un entramado de pasillos en plantas subterraneas. Anteriormente a su cierre se trataba de instalaciones de adiestramiento para unidades normalmente caninas, y de almacen de abastecimiento para transportes."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1900, 1800] },
+      "properties": {
+        "nombre": "Deiton",
+        "tipo": "planeta",
+        "tam": 30,
+        "descripcion": "Clanes Deitones, humanoides con forma de largato",
+        "faccion": "Imperio",
+        "estado": "Neutrón"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [400, 700] },
+      "properties": {
+        "nombre": "Beta-7",
+        "tipo": "asteroide",
+        "tam": 30,
+        "descripcion": "Asteroide con instalaciones de la Brigada.",
+        "estado": "Explotación"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1000, 1500] },
+      "properties": {
+        "nombre": "Regium Paradise",
+        "tipo": "base",
+        "tam": 30,
+        "descripcion": "Base de la Brigada Paraidaise",
+        "estado": "Activa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1200, 800] },
+      "properties": {
+        "nombre": "Regium Hyperion",
+        "tipo": "base",
+        "tam": 30,
+        "descripcion": "Base de la Brigada Hyperion",
+        "estado": "Activa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [700, 900] },
+      "properties": {
+        "nombre": "Regium Arkanian",
+        "tipo": "base",
+        "tam": 30,
+        "descripcion": "Base de la Brigada Arkanian",
+        "estado": "Activa"
+      }
+    }
+  ]
+}
