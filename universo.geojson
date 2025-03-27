@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [1000, 1000] },
+      "geometry": { "type": "Point", "coordinates": [1000, 1200] },
       "properties": {
         "nombre": "Tierra",
         "tipo": "planeta",
@@ -14,7 +14,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [950, 900] },
+      "geometry": { "type": "Point", "coordinates": [900, 940] },
       "properties": {
         "nombre": "Mercurio",
         "tipo": "planeta",
@@ -24,7 +24,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [1050, 900] },
+      "geometry": { "type": "Point", "coordinates": [1150, 900] },
       "properties": {
         "nombre": "Venus",
         "tipo": "planeta",
@@ -34,7 +34,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [920, 1025] },
+      "geometry": { "type": "Point", "coordinates": [800, 1050] },
       "properties": {
         "nombre": "Marte",
         "tipo": "planeta",
@@ -45,7 +45,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [1100, 1080] },
+      "geometry": { "type": "Point", "coordinates": [1200, 1100] },
       "properties": {
         "nombre": "Júpiter",
         "tipo": "planeta",
@@ -55,7 +55,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [870, 1150] },
+      "geometry": { "type": "Point", "coordinates": [750, 1200] },
       "properties": {
         "nombre": "Saturno",
         "tipo": "planeta",
@@ -65,7 +65,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [1150, 1180] },
+      "geometry": { "type": "Point", "coordinates": [1250, 1250] },
       "properties": {
         "nombre": "Urano",
         "tipo": "planeta",
@@ -75,7 +75,7 @@
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [850, 1250] },
+      "geometry": { "type": "Point", "coordinates": [700, 1350] },
       "properties": {
         "nombre": "Neptuno",
         "tipo": "planeta",
@@ -83,6 +83,7 @@
         "descripcion": "Furiosas tormentas azules."
       }
     },
+
     {
       "type": "Feature",
       "geometry": { "type": "Point", "coordinates": [400, 1400] },
@@ -122,7 +123,7 @@
         "tipo": "planeta",
         "tam": 30,
         "descripcion": "Firin es un planeta pequeño, con atmosfera y entorno parecido al de la Tierra, a poca distancia de esta, y bien comunicado con rutas espaciales.",
-        "Estado": "Colonizado con muchas bases de comercio interplanetario, y muchos centros de negocio."
+        "estado": "Colonizado con muchas bases de comercio interplanetario, y muchos centros de negocio."
       }
     },
     {
@@ -133,7 +134,7 @@
         "tipo": "satélite",
         "tam": 30,
         "descripcion": "Pequeño satélite artificial en la órbita lunar.",
-        "estado": "Se creía en desuso y sus instalaciones abandonadas. El edificio principal tiene solo dos plantas en la superficie, pero todo un entramado de pasillos en plantas subterraneas. Anteriormente a su cierre se trataba de instalaciones de adiestramiento para unidades normalmente caninas, y de almacen de abastecimiento para transportes."
+        "estado": "Se creía en desuso y sus instalaciones abandonadas..."
       }
     },
     {
@@ -143,8 +144,7 @@
         "nombre": "Deiton",
         "tipo": "planeta",
         "tam": 30,
-        "descripcion": "Clanes Deitones, humanoides con forma de largato",
-        "faccion": "Imperio",
+        "descripcion": "Clanes Deitones, humanoides con forma de lagarto",
         "estado": "Neutrón"
       }
     },
@@ -159,38 +159,152 @@
         "estado": "Explotación"
       }
     },
+
+
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [1000, 1500] },
+      "geometry": { "type": "Point", "coordinates": [1000, 900] },
       "properties": {
         "nombre": "Regium Paradise",
         "tipo": "base",
-        "tam": 30,
+        "tam": 20,
         "descripcion": "Base de la Brigada Paraidaise",
         "estado": "Activa"
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [1200, 800] },
+      "geometry": { "type": "Point", "coordinates": [1350, 1440] },
       "properties": {
         "nombre": "Regium Hyperion",
         "tipo": "base",
-        "tam": 30,
+        "tam": 20,
         "descripcion": "Base de la Brigada Hyperion",
         "estado": "Activa"
       }
     },
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [700, 900] },
+      "geometry": { "type": "Point", "coordinates": [900, 1040] },
       "properties": {
         "nombre": "Regium Arkanian",
         "tipo": "base",
-        "tam": 30,
+        "tam": 20,
         "descripcion": "Base de la Brigada Arkanian",
         "estado": "Activa"
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1000, 1230] },
+      "properties": {
+        "nombre": "Luna",
+        "tipo": "luna",
+        "tam": 10,
+        "descripcion": "Satélite natural de la Tierra.",
+        "estado": "Activa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1230, 1100] },
+      "properties": {
+        "nombre": "Europa",
+        "tipo": "luna",
+        "tam": 10,
+        "descripcion": "Una de las lunas más interesantes de Júpiter, con un océano subterráneo.",
+        "estado": "Activa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1180, 1070] },
+      "properties": {
+        "nombre": "Ganímedes",
+        "tipo": "luna",
+        "tam": 12,
+        "descripcion": "La luna más grande del sistema solar.",
+        "estado": "Activa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1200, 1125] },
+      "properties": {
+        "nombre": "Calisto",
+        "tipo": "luna",
+        "tam": 11,
+        "descripcion": "Luna antigua y llena de cráteres que orbita Júpiter.",
+        "estado": "Inactiva"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [760, 1170] },
+      "properties": {
+        "nombre": "Titán",
+        "tipo": "luna",
+        "tam": 12,
+        "descripcion": "Luna de Saturno con atmósfera densa y lagos de metano.",
+        "estado": "Colonizable"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [770, 1200] },
+      "properties": {
+        "nombre": "Encélado",
+        "tipo": "luna",
+        "tam": 9,
+        "descripcion": "Luna helada que lanza chorros de vapor desde su interior.",
+        "estado": "Activa"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1200, 1270] },
+      "properties": {
+        "nombre": "Miranda",
+        "tipo": "luna",
+        "tam": 8,
+        "descripcion": "Pequeña y caótica luna de Urano.",
+        "estado": "Inestable"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1240, 1230] },
+      "properties": {
+        "nombre": "Titania",
+        "tipo": "luna",
+        "tam": 10,
+        "descripcion": "La luna más grande de Urano.",
+        "estado": "Dormida"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [705, 1305] },
+      "properties": {
+        "nombre": "Tritón",
+        "tipo": "luna",
+        "tam": 11,
+        "descripcion": "Luna retrógrada y helada de Neptuno.",
+        "estado": "Observación"
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [1000, 1000] },
+      "properties": {
+        "nombre": "Sol",
+        "tipo": "estrella",
+        "tam": 40,
+        "descripcion": "Estrella central del sistema solar."
       }
     }
   ]
 }
+   
