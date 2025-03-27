@@ -85,7 +85,7 @@
 
     .base {
       background: radial-gradient(circle, #f0f, #400040);
-      border-radius: 4px;
+      border-radius: 3px;
       transform: rotate(45deg);
       box-shadow: 0 0 12px #f0f, 0 0 24px #f0f;
       animation: basePulse 6s infinite ease-in-out;
@@ -118,6 +118,34 @@
       font-family: 'Orbitron', sans-serif;
       letter-spacing: 0.05em;
     }
+
+    .luna {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ccc, #666);
+    box-shadow: 0 0 8px #aaa, 0 0 12px #fff;
+    animation: pulseLuna 6s infinite ease-in-out;
+  }
+    .estrella {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #ff0, #f90, #c00);
+    box-shadow: 0 0 40px #f90, 0 0 80px #ff0;
+    animation: solBrilla 6s infinite ease-in-out;
+    }
+
+    @keyframes solBrilla {
+    0%, 100% { box-shadow: 0 0 30px #f90, 0 0 60px #ff0; }
+    50% { box-shadow: 0 0 60px #f90, 0 0 120px #ff0; }
+    }
+
+  @keyframes pulseLuna {
+    0% { box-shadow: 0 0 4px #aaa; }
+    50% { box-shadow: 0 0 12px #eee; }
+    100% { box-shadow: 0 0 4px #aaa; }
+  }
   </style>
 </head>
 <body>
@@ -136,41 +164,69 @@
     const bounds = [[0, 0], [2000, 2000]];
     map.setView([1000, 1000], 0);
 
+    const basesOrbitantes = [
+  {
+    nombre: "Regium Paradise",
+    anguloInicial: 0,
+    radioX: 110,
+    radioY: 90,
+    velocidad: 0.001,
+    marcador: null
+  },
+  {
+    nombre: "Regium Hyperion",
+    anguloInicial: 2,
+    radioX: 110,
+    radioY: 90,
+    velocidad: 0.001,
+    marcador: null
+  },
+  {
+    nombre: "Regium Arkanian",
+    anguloInicial: 4,
+    radioX: 110,
+    radioY: 90,
+    velocidad: 0.001,
+    marcador: null
+  }
+];
+
+  const centro = [1000, 1200]; // Centro orbital: Tierra
+
     // Órbitas del sistema solar
     const orbitas = [
-      { radio: 100, nombre: 'Mercurio' },
-      { radio: 130, nombre: 'Venus' },
-      { radio: 180, nombre: 'Marte' },
-      { radio: 250, nombre: 'Júpiter' },
-      { radio: 300, nombre: 'Saturno' },
-      { radio: 350, nombre: 'Urano' },
-      { radio: 400, nombre: 'Neptuno' }
+    { nombre: 'Mercurio',  radio: 250 },
+    { nombre: 'Venus',     radio: 300 },
+    { nombre: 'Marte',     radio: 360 },
+    { nombre: 'Júpiter',   radio: 430 },
+    { nombre: 'Saturno',   radio: 490 },
+    { nombre: 'Urano',     radio: 540 },
+    { nombre: 'Neptuno',   radio: 600 }
     ];
 
-    orbitas.forEach(orbita => {
-      L.circle([1000, 1000], {
-        radius: orbita.radio,
-        color: '#0ff',
-        weight: 1,
-        opacity: 0.4,
-        fill: false,
-        dashArray: '2,4'
-      }).addTo(map);
-    });
+  orbitas.forEach(orbita => {
+    L.circle([1000, 1000], {
+    radius: orbita.radio,
+    color: '#0ff',
+    weight: 1,
+    opacity: 0.3,
+    fill: false,
+    dashArray: '2,4'
+  }).addTo(map);
+});
 
     // Elipse morada simulada alrededor de las bases Regium
-    const centroElipse = [1000, 1100]; // punto medio visual
-    const radioX = 500; // "ancho" horizontal de la elipse
-    const radioY = 400; // "alto" vertical de la elipse
+    const centroElipse = [1000, 1200]; // Ahora el centro es la Tierra
+    const radioX = 150; // horizontal
+    const radioY = 120; // vertical
 
-// Generar puntos de una elipse en coordenadas CRS.Simple
-    const puntosElipse = [];
-    for (let i = 0; i <= 360; i += 5) {
-    const rad = i * Math.PI / 180;
-    const x = centroElipse[0] + radioX * Math.cos(rad);
-    const y = centroElipse[1] + radioY * Math.sin(rad);
-    puntosElipse.push([y, x]); // Leaflet usa [lat, lng]
-  }
+const puntosElipse = [];
+for (let i = 0; i <= 360; i += 5) {
+  const rad = i * Math.PI / 180;
+  const x = centroElipse[0] + radioX * Math.cos(rad);
+  const y = centroElipse[1] + radioY * Math.sin(rad);
+  puntosElipse.push([y, x]); // Leaflet usa [lat, lng]
+}
 
 L.polyline(puntosElipse, {
   color: '#f0f',
@@ -179,6 +235,7 @@ L.polyline(puntosElipse, {
   dashArray: '4, 6'
 }).addTo(map);
 
+  
 
     // Fondo invisible delimitador
     L.rectangle(bounds, {
@@ -202,6 +259,8 @@ L.polyline(puntosElipse, {
                          : tipo === "base" ? "base"
                          : tipo === "asteroide" ? "asteroide"
                          : tipo === "satélite" ? "satélite"
+                         : tipo === "luna" ? "luna"
+                         : tipo === "estrella" ? "estrella"
                          : "default";
 
             const size = feature.properties.tam || 20;
@@ -225,12 +284,20 @@ L.polyline(puntosElipse, {
                 </div>
               `).addTo(map);
 
-            marker.bindTooltip(feature.properties.nombre || '', {
+              if (tipo === "base" && basesOrbitantes.some(b => b.nombre === feature.properties.nombre)) {
+              const base = basesOrbitantes.find(b => b.nombre === feature.properties.nombre);
+              base.marcador = marker;
+              }
+
+              if (feature.properties.tipo !== 'luna') {
+              marker.bindTooltip(feature.properties.nombre || '', {
               permanent: true,
               direction: 'top',
               className: 'planet-label',
               offset: [0, -size / 2 - 5]
-            });
+              });
+            } 
+
 
             return marker;
           }
@@ -264,6 +331,24 @@ L.polyline(puntosElipse, {
     }
   ).addTo(map);
   }
+
+  function animarOrbitas() {
+  setInterval(() => {
+    basesOrbitantes.forEach(base => {
+      base.anguloInicial += base.velocidad;
+      const rad = base.anguloInicial;
+      const x = centro[0] + base.radioX * Math.cos(rad);
+      const y = centro[1] + base.radioY * Math.sin(rad);
+
+      if (base.marcador) {
+        base.marcador.setLatLng([y, x]);
+      }
+    });
+  }, 30);
+  }
+
+  animarOrbitas();
+
 
   dibujarRutaCurva([1000, 1500], [800, 1800]); // Regium Paradise → Ecurión
   dibujarRutaCurva([800, 1800], [1000, 2000]); // Ecurión → Etherion
